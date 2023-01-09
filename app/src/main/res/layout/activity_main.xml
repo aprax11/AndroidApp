@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context=".activitys.MainActivity"
+    >
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="616dp"
+        android:layout_below="@+id/buttonSearchForm"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dip"
+        android:background="#66FFFFFF"
+        android:drawSelectorOnTop="false"
+        android:listSelector="@android:color/transparent"
+        android:visibility="visible">
+    </ListView>
+
+    <Button
+        android:id="@+id/buttonSearchForm"
+        android:layout_width="128dp"
+        android:layout_height="66dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="153dp"
+        android:listSelector="@android:color/transparent"
+        android:text="post Challenge" />
+</RelativeLayout>
