@@ -11,13 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Connection {
-    String url;
-    public Connection(String url){
-        this.url = url;
-    }
-
-    public String startRequest(String urlEncoded) throws IOException {
-        URL url = new URL(this.url);
+    public static String startRequest(String urlEncoded, String urlString) throws IOException {
+        URL url = new URL(urlString);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("POST");
         httpURLConnection.setDoOutput(true);
@@ -32,9 +27,9 @@ public class Connection {
 
         InputStream inputStream = httpURLConnection.getInputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-        StringBuilder builder = new StringBuilder() ;
+        StringBuilder builder = new StringBuilder();
         String line;
-        while((line = bufferedReader.readLine()) != null){
+        while ((line = bufferedReader.readLine()) != null) {
 
             builder.append(line);
         }
@@ -44,5 +39,4 @@ public class Connection {
 
         return builder.toString();
     }
-
 }

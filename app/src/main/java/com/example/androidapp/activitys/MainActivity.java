@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.example.androidapp.R;
 import com.example.androidapp.control.Control;
+import com.example.androidapp.control.Network;
 import com.example.androidapp.model.IChallenge;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     Button searchFormButton;
     Control control;
+    List<IChallenge> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,27 +29,18 @@ public class MainActivity extends AppCompatActivity {
 
         control = new Control();
 
-        List<IChallenge> list = control.getAll();
-
-        ChallengeAdapter challengeAdapter = new ChallengeAdapter(this, list);
-
-        listView.setAdapter(challengeAdapter);
-
-
+        setListView();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
                 Intent intent = new Intent(MainActivity.this, ChallengeActivity.class);
                 control = new Control();
-                intent.putExtra("NAME", list.get(position).getName());
-                intent.putExtra("DESCRIPTION", list.get(position).getDescription());
                 intent.putExtra("ID", list.get(position).getId());
-                intent.putExtra("PARTICIPANTLIST", control.getParticipants(list.get(position).getId()));
+                intent.putExtra("CONTROL", control);
                 startActivity(intent);
             }
         });
-
-
 
         searchFormButton = (Button) findViewById(R.id.buttonSearchForm);
         searchFormButton.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +51,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
         public void openSearchFormActivity() {
+
+
             Intent intent = new Intent(this, SearchForm.class );
+
+            control = new Control();
+            intent.putExtra("CONTROL", control);
             startActivity(intent);
-
-
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        setListView();
+    }
+    private void setListView(){
+        ListView listView = findViewById(R.id.listview);
+        list = control.getAll(new Network());
 
+        ChallengeAdapter challengeAdapter = new ChallengeAdapter(this, list);
+
+        listView.setAdapter(challengeAdapter);
+    }
 }

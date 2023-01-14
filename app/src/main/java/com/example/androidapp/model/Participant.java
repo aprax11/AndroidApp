@@ -2,7 +2,7 @@ package com.example.androidapp.model;
 
 import java.io.Serializable;
 
-public class Participant implements IParticipant {
+public class Participant implements IParticipant, Serializable {
     @Override
     public String getScore() {
         return score;

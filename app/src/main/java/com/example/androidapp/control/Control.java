@@ -8,6 +8,7 @@ import com.example.androidapp.model.IParticipant;
 import com.example.androidapp.model.Participant;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class Control {
-    Network network = new Network();
+public class Control implements IControl {
 
-    public List<IChallenge> getAll(){
+    @Override
+    public List<IChallenge> getAll(Network network){
         try {
             String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getAll", "UTF-8");
             String res = network.execute("http://10.0.2.2/androidBelegPhpScript/getAll.php", url).get();
@@ -43,8 +44,8 @@ public class Control {
         return null;
     }
 
-    public ArrayList<IParticipant> getParticipants(String id){
-
+    @Override
+    public ArrayList<IParticipant> getParticipants(String id, Network network){
         try {
             String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getParticipants", "UTF-8")+"&"
                 +URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8");
@@ -71,7 +72,8 @@ public class Control {
         return null;
     }
 
-    public String addParticipation(String participantName, String score, String challengeId){
+    @Override
+    public String addParticipation(String participantName, String score, String challengeId, Network network){
         try{
             String url = URLEncoder.encode("participantName", "UTF-8")+"="+URLEncoder.encode(participantName, "UTF-8")+"&"
                     +URLEncoder.encode("score", "UTF-8")+"="+URLEncoder.encode(score, "UTF-8")+"&"
@@ -85,7 +87,8 @@ public class Control {
         }
         return "";
     }
-    public String addChallenge(String challengeName, String challengeDescription){
+    @Override
+    public String addChallenge(String challengeName, String challengeDescription, Network network){
         try{
             String url = URLEncoder.encode("challengeName", "UTF-8")+"="+URLEncoder.encode(challengeName, "UTF-8")+"&"
                     +URLEncoder.encode("challengeDescription", "UTF-8")+"="+URLEncoder.encode(challengeDescription, "UTF-8");
@@ -112,8 +115,8 @@ public class Control {
 
         List<String[]>trimmed = new LinkedList<>();
         for (String ele : rows) {
-            trimmed.add(ele.split(","));
-            for (String elem : ele.split(",")
+            trimmed.add(ele.split("`"));
+            for (String elem : ele.split("`")
             ) {
                 Log.d("network", elem);
             }

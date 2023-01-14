@@ -1,6 +1,7 @@
 package com.example.androidapp.activitys;
 
 import static androidx.test.espresso.Espresso.*;
+import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -40,5 +41,13 @@ public class MainActivityTest {
         ActivityScenario<MainActivity> activityScenario = ActivityScenario.launch(MainActivity.class);
 
         onView(withId(R.id.buttonSearchForm)).check(matches(withText("post Challenge")));
+    }
+    @Test
+    public void buttonNavigation_Test() {
+        ActivityScenario<MainActivity> activityScenario = ActivityScenario.launch(MainActivity.class);
+
+        onView(withId(R.id.buttonSearchForm)).perform(click());
+
+        onView(withId(R.id.searchForm)).check(matches(isDisplayed()));
     }
 }

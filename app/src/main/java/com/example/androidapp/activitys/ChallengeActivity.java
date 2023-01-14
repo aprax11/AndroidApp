@@ -10,51 +10,44 @@ import android.widget.TextView;
 
 import com.example.androidapp.R;
 import com.example.androidapp.control.Control;
+import com.example.androidapp.control.IControl;
+import com.example.androidapp.control.Network;
 import com.example.androidapp.model.IParticipant;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChallengeActivity extends AppCompatActivity {
     EditText addParticipationName;
     EditText addParticipationScore;
     ListView participantsListView;
-    TextView descriptionTextView;
-    TextView nameTextView;
     String id;
     ArrayList<IParticipant> participantList;
-    Control control;
+    IControl control;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
-        control = new Control();
 
-        String name = getIntent().getStringExtra("NAME");
-        String description = getIntent().getStringExtra("DESCRIPTION");
+
         id = getIntent().getStringExtra("ID");
-        participantList = (ArrayList<IParticipant>) getIntent().getSerializableExtra("PARTICIPANTLIST");
+        control = (Control) getIntent().getSerializableExtra("CONTROL");
 
-        nameTextView = findViewById(R.id.Name);
-        descriptionTextView = findViewById(R.id.Description);
         participantsListView = findViewById(R.id.ParticipantsList);
         addParticipationName = (EditText) findViewById(R.id.addParticipationName);
         addParticipationScore = (EditText) findViewById(R.id.addParticipationScore);
 
 
-
+        participantList = control.getParticipants(id, new Network());
         setParticipantList(participantList);
-        nameTextView.setText(name);
-        descriptionTextView.setText(description);
+
 
     }
     public void onSubmitParticipation(View view){
         String addParticipantName = this.addParticipationName.getText().toString();
         String addParticipantScore= this.addParticipationScore.getText().toString();
 
-        Control control = new Control();
-
-        String ret = control.addParticipation(addParticipantName, addParticipantScore, id);
+        String ret = control.addParticipation(addParticipantName, addParticipantScore, id, new Network());
         if(ret.equals("1")){
             finish();
         }else{

@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.example.androidapp.R;
 import com.example.androidapp.control.Control;
+import com.example.androidapp.control.Network;
 
 public class SearchForm extends AppCompatActivity {
     Control control;
@@ -17,15 +18,18 @@ public class SearchForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_form);
 
-        control = new Control();
+        control = (Control) getIntent().getSerializableExtra("CONTROL");
         challengeName = (EditText) findViewById(R.id.challengeName);
         challengeDescription = (EditText) findViewById(R.id.challengeDescription);
+        
     }
 
         public void onAddChallenge(View view){
         String challengeName = this.challengeName.getText().toString();
         String challengeDescription = this.challengeDescription.getText().toString();
 
-        control.addChallenge(challengeName, challengeDescription);
+        control.addChallenge(challengeName, challengeDescription, new Network());
+
+        finish();
     }
 }
