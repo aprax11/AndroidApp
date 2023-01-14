@@ -36,8 +36,6 @@ public class ControlTest {
     public final String CHALLENGEDESCRIPTION = "This is a test description";
     public final String CHALLENGEID = "1";
 
-    public Network mockNetwork = Mockito.mock(Network.class);
-
     @Test
     public void addChallenge_Test() throws UnsupportedEncodingException {
         IControl control = new Control();
@@ -73,6 +71,18 @@ public class ControlTest {
         Assert.assertEquals(PARTICIPANTSCORE, ret.get(0).getScore());
     }
     @Test
+    public void getParticipantsUsesCorrectPhpFile_Test() throws UnsupportedEncodingException {
+        IControl control = new Control();
+        Network mockNetwork = Mockito.mock(Network.class);
+
+        ArrayList<IParticipant> ret = control.getParticipants(CHALLENGEID, mockNetwork);
+
+        String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getParticipants", "UTF-8")+"&"
+                +URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(CHALLENGEID, "UTF-8");
+
+        verify(mockNetwork).doInBackground(GETPARTICIPANTSSCRIPTLOCATION, url);
+    }
+    @Test
     public void getAll_Test(){
         IControl control = new Control();
         Network mockNetwork = Mockito.mock(Network.class);
@@ -83,6 +93,17 @@ public class ControlTest {
         Assert.assertEquals(CHALLENGENAME, ret.get(0).getName());
         Assert.assertEquals(CHALLENGEID, ret.get(0).getId());
         Assert.assertEquals(CHALLENGEDESCRIPTION, ret.get(0).getDescription());
+    }
+    @Test
+    public void getAllUsesCorrectPhpFile_Test() throws UnsupportedEncodingException {
+        IControl control = new Control();
+        Network mockNetwork = Mockito.mock(Network.class);
+
+        List<IChallenge> ret = control.getAll(mockNetwork);
+
+        String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getAll", "UTF-8");
+
+        verify(mockNetwork).doInBackground(GETALLSCRIPTLOCATION, url);
     }
 
 }
