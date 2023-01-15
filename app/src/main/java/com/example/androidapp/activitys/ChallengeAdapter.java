@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.IChallenge;
+import com.example.androidapp.containers.IChallenge;
 
 import java.util.List;
 

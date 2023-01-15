@@ -1,14 +1,13 @@
-package com.example.androidapp.control;
+package com.example.androidapp.model;
 
 import android.util.Log;
 
-import com.example.androidapp.model.Challenge;
-import com.example.androidapp.model.IChallenge;
-import com.example.androidapp.model.IParticipant;
-import com.example.androidapp.model.Participant;
+import com.example.androidapp.containers.Challenge;
+import com.example.androidapp.containers.IChallenge;
+import com.example.androidapp.containers.IParticipant;
+import com.example.androidapp.containers.Participant;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -74,13 +73,15 @@ public class Control implements IControl {
 
     @Override
     public String addParticipation(String participantName, String score, String challengeId, Network network){
+        if(participantName.isEmpty() || score.isEmpty() || challengeId.isEmpty()){
+            return "1";
+        }
         try{
             String url = URLEncoder.encode("participantName", "UTF-8")+"="+URLEncoder.encode(participantName, "UTF-8")+"&"
                     +URLEncoder.encode("score", "UTF-8")+"="+URLEncoder.encode(score, "UTF-8")+"&"
                     +URLEncoder.encode("challengeId", "UTF-8")+"="+URLEncoder.encode(challengeId, "UTF-8");
             String res = network.execute("http://10.0.2.2/androidBelegPhpScript/addParticipation.php", url).get();
-            Log.d("Control", challengeId);
-            Log.d("Control", res);
+
             return res;
         }catch(IOException | ExecutionException | InterruptedException e){
             e.printStackTrace();
@@ -89,6 +90,10 @@ public class Control implements IControl {
     }
     @Override
     public String addChallenge(String challengeName, String challengeDescription, Network network){
+        if(challengeName.isEmpty() || challengeDescription.isEmpty()){
+            return "1";
+        }
+
         try{
             String url = URLEncoder.encode("challengeName", "UTF-8")+"="+URLEncoder.encode(challengeName, "UTF-8")+"&"
                     +URLEncoder.encode("challengeDescription", "UTF-8")+"="+URLEncoder.encode(challengeDescription, "UTF-8");

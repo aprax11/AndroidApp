@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.androidapp.R;
-import com.example.androidapp.control.Control;
-import com.example.androidapp.control.Network;
+import com.example.androidapp.model.Control;
+import com.example.androidapp.model.Network;
 
-public class SearchForm extends AppCompatActivity {
+public class AddChallengeForm extends AppCompatActivity {
     Control control;
     EditText challengeName;
     EditText challengeDescription;

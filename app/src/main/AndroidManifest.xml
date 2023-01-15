@@ -51,7 +51,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activitys.SearchForm"
+            android:name=".activitys.AddChallengeForm"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

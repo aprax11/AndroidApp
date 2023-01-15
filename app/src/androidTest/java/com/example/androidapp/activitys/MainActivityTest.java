@@ -48,6 +48,6 @@ public class MainActivityTest {
 
         onView(withId(R.id.buttonSearchForm)).perform(click());
 
-        onView(withId(R.id.searchForm)).check(matches(isDisplayed()));
+        onView(withId(R.id.addChallengeForm)).check(matches(isDisplayed()));
     }
 }

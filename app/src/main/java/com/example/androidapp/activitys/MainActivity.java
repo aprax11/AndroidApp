@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.androidapp.R;
-import com.example.androidapp.control.Control;
-import com.example.androidapp.control.Network;
-import com.example.androidapp.model.IChallenge;
+import com.example.androidapp.model.Control;
+import com.example.androidapp.model.Network;
+import com.example.androidapp.containers.IChallenge;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         public void openSearchFormActivity() {
 
 
-            Intent intent = new Intent(this, SearchForm.class );
+            Intent intent = new Intent(this, AddChallengeForm.class );
 
             control = new Control();
             intent.putExtra("CONTROL", control);

@@ -21,7 +21,7 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.androidapp.R;
-import com.example.androidapp.control.Control;
+import com.example.androidapp.model.Control;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -1,15 +1,14 @@
-package com.example.androidapp.control;
+package com.example.androidapp.model;
 
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.example.androidapp.model.IChallenge;
-import com.example.androidapp.model.IParticipant;
+import com.example.androidapp.containers.IChallenge;
+import com.example.androidapp.containers.IParticipant;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;

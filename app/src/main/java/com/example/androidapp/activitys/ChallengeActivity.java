@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.androidapp.R;
-import com.example.androidapp.control.Control;
-import com.example.androidapp.control.IControl;
-import com.example.androidapp.control.Network;
-import com.example.androidapp.model.IParticipant;
+import com.example.androidapp.model.Control;
+import com.example.androidapp.model.IControl;
+import com.example.androidapp.model.Network;
+import com.example.androidapp.containers.IParticipant;
 
 import java.util.ArrayList;
 

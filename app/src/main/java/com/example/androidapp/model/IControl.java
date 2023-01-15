@@ -1,7 +1,7 @@
-package com.example.androidapp.control;
+package com.example.androidapp.model;
 
-import com.example.androidapp.model.IChallenge;
-import com.example.androidapp.model.IParticipant;
+import com.example.androidapp.containers.IChallenge;
+import com.example.androidapp.containers.IParticipant;
 
 import java.io.Serializable;
 import java.util.ArrayList;
