@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Control;
-import com.example.androidapp.model.Network;
+import com.example.androidapp.model.Model;
+import com.example.androidapp.model.IModel;
 
 public class AddChallengeForm extends AppCompatActivity {
-    Control control;
+    IModel model;
     EditText challengeName;
     EditText challengeDescription;
     @Override
@@ -18,7 +18,7 @@ public class AddChallengeForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_form);
 
-        control = (Control) getIntent().getSerializableExtra("CONTROL");
+        model = (Model) getIntent().getSerializableExtra("CONTROL");
         challengeName = (EditText) findViewById(R.id.challengeName);
         challengeDescription = (EditText) findViewById(R.id.challengeDescription);
         
@@ -28,7 +28,7 @@ public class AddChallengeForm extends AppCompatActivity {
         String challengeName = this.challengeName.getText().toString();
         String challengeDescription = this.challengeDescription.getText().toString();
 
-        control.addChallenge(challengeName, challengeDescription, new Network());
+        model.addChallenge(challengeName, challengeDescription);
 
         finish();
     }

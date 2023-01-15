@@ -8,9 +8,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Control;
-import com.example.androidapp.model.IControl;
-import com.example.androidapp.model.Network;
+import com.example.androidapp.model.Model;
+import com.example.androidapp.model.IModel;
 import com.example.androidapp.containers.IParticipant;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class ChallengeActivity extends AppCompatActivity {
     ListView participantsListView;
     String id;
     ArrayList<IParticipant> participantList;
-    IControl control;
+    IModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +29,14 @@ public class ChallengeActivity extends AppCompatActivity {
 
 
         id = getIntent().getStringExtra("ID");
-        control = (Control) getIntent().getSerializableExtra("CONTROL");
+        model = (Model) getIntent().getSerializableExtra("CONTROL");
 
         participantsListView = findViewById(R.id.ParticipantsList);
         addParticipationName = (EditText) findViewById(R.id.addParticipationName);
         addParticipationScore = (EditText) findViewById(R.id.addParticipationScore);
 
 
-        participantList = control.getParticipants(id, new Network());
+        participantList = model.getParticipants(id);
         setParticipantList(participantList);
 
 
@@ -46,7 +45,7 @@ public class ChallengeActivity extends AppCompatActivity {
         String addParticipantName = this.addParticipationName.getText().toString();
         String addParticipantScore= this.addParticipationScore.getText().toString();
 
-        String ret = control.addParticipation(addParticipantName, addParticipantScore, id, new Network());
+        String ret = model.addParticipation(addParticipantName, addParticipantScore, id);
         if(ret.equals("1")){
             finish();
         }else{

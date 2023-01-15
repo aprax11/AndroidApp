@@ -1,13 +1,12 @@
 package com.example.androidapp.model;
 
-import android.util.Log;
-
 import com.example.androidapp.containers.Challenge;
 import com.example.androidapp.containers.IChallenge;
 import com.example.androidapp.containers.IParticipant;
 import com.example.androidapp.containers.Participant;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -15,13 +14,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class Control implements IControl {
+public class Model implements IModel, Serializable {
+    private AsyncTaskWrapper asyncTaskWrapper;
 
+    public Model(){
+        asyncTaskWrapper = new AsyncTaskWrapper();
+    }
     @Override
-    public List<IChallenge> getAll(Network network){
+    public List<IChallenge> getAll(){
         try {
             String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getAll", "UTF-8");
-            String res = network.execute("http://10.0.2.2/androidBelegPhpScript/getAll.php", url).get();
+            String res = asyncTaskWrapper.startAsyncTask("http://10.0.2.2/androidBelegPhpScript/getAll.php", url);
 
 
             List<IChallenge> list = new ArrayList<>();
@@ -44,11 +47,11 @@ public class Control implements IControl {
     }
 
     @Override
-    public ArrayList<IParticipant> getParticipants(String id, Network network){
+    public ArrayList<IParticipant> getParticipants(String id){
         try {
             String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getParticipants", "UTF-8")+"&"
                 +URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8");
-            String res = network.execute("http://10.0.2.2/androidBelegPhpScript/getParticipants.php", url).get();
+            String res = asyncTaskWrapper.startAsyncTask("http://10.0.2.2/androidBelegPhpScript/getParticipants.php", url);
             ArrayList<IParticipant> list = new ArrayList<>();
             if(!res.equals("noResult")){
                 List<String[]> trimmed = parseString(res);
@@ -65,14 +68,16 @@ public class Control implements IControl {
             }
 
             return list;
-        } catch (UnsupportedEncodingException | InterruptedException | ExecutionException e) {
+        } catch (UnsupportedEncodingException  e) {
             e.printStackTrace();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
 
     @Override
-    public String addParticipation(String participantName, String score, String challengeId, Network network){
+    public String addParticipation(String participantName, String score, String challengeId){
         if(participantName.isEmpty() || score.isEmpty() || challengeId.isEmpty()){
             return "1";
         }
@@ -80,16 +85,18 @@ public class Control implements IControl {
             String url = URLEncoder.encode("participantName", "UTF-8")+"="+URLEncoder.encode(participantName, "UTF-8")+"&"
                     +URLEncoder.encode("score", "UTF-8")+"="+URLEncoder.encode(score, "UTF-8")+"&"
                     +URLEncoder.encode("challengeId", "UTF-8")+"="+URLEncoder.encode(challengeId, "UTF-8");
-            String res = network.execute("http://10.0.2.2/androidBelegPhpScript/addParticipation.php", url).get();
+            String res = asyncTaskWrapper.startAsyncTask("http://10.0.2.2/androidBelegPhpScript/addParticipation.php", url);
 
             return res;
-        }catch(IOException | ExecutionException | InterruptedException e){
+        }catch(IOException  e){
             e.printStackTrace();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return "";
     }
     @Override
-    public String addChallenge(String challengeName, String challengeDescription, Network network){
+    public String addChallenge(String challengeName, String challengeDescription){
         if(challengeName.isEmpty() || challengeDescription.isEmpty()){
             return "1";
         }
@@ -97,35 +104,40 @@ public class Control implements IControl {
         try{
             String url = URLEncoder.encode("challengeName", "UTF-8")+"="+URLEncoder.encode(challengeName, "UTF-8")+"&"
                     +URLEncoder.encode("challengeDescription", "UTF-8")+"="+URLEncoder.encode(challengeDescription, "UTF-8");
-            String res = network.execute("http://10.0.2.2/androidBelegPhpScript/addChallenge.php", url).get();
+            String res = asyncTaskWrapper.startAsyncTask("http://10.0.2.2/androidBelegPhpScript/addChallenge.php", url);
 
             return res;
-        }catch(IOException | ExecutionException | InterruptedException e){
+        }catch(IOException  e){
             e.printStackTrace();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return "";
     }
-/*
-    public static Control getNewInsatnce(){
-        return new Control();
-    }
 
- */
 
 
     private List<String[]> parseString(String res){
         res.trim();
         String[] rows = res.split("~");
-        Log.d("tag", String.valueOf(rows.length));
 
         List<String[]>trimmed = new LinkedList<>();
         for (String ele : rows) {
             trimmed.add(ele.split("`"));
+            /*
             for (String elem : ele.split("`")
             ) {
-                Log.d("network", elem);
             }
+
+             */
         }
         return trimmed;
+    }
+
+
+
+    @Override
+    public void setAsyncTaskWrapper(AsyncTaskWrapper asyncTaskWrapper) {
+        this.asyncTaskWrapper = asyncTaskWrapper;
     }
 }

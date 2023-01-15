@@ -21,7 +21,7 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Control;
+import com.example.androidapp.model.Model;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class ParticipantListInstrumentedTest {
                             InstrumentationRegistry.getInstrumentation().getTargetContext(),
                             ChallengeActivity.class)
                             .putExtra("ID", "1")
-                            .putExtra("CONTROL", new Control())
+                            .putExtra("CONTROL", new Model())
             );
 
     @Test

@@ -21,8 +21,8 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Control;
-import com.example.androidapp.model.IControl;
+import com.example.androidapp.model.IModel;
+import com.example.androidapp.model.Model;
 
 
 import org.junit.Rule;
@@ -37,7 +37,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 public class ChallengeActivityTest {
     @Mock
-    IControl control = mock(Control.class, withSettings().serializable());
+    IModel control = mock(Model.class, withSettings().serializable());
     //Connection connection = mock(Connection.class);
 
     @Rule

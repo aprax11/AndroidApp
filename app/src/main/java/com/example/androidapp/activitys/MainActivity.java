@@ -9,15 +9,15 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Control;
-import com.example.androidapp.model.Network;
+import com.example.androidapp.model.Model;
+import com.example.androidapp.model.IModel;
 import com.example.androidapp.containers.IChallenge;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button searchFormButton;
-    Control control;
+    IModel model;
     List<IChallenge> list;
 
     @Override
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listview);
 
-        control = new Control();
+        model = new Model();
 
         setListView();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 Intent intent = new Intent(MainActivity.this, ChallengeActivity.class);
-                control = new Control();
+                model = new Model();
                 intent.putExtra("ID", list.get(position).getId());
-                intent.putExtra("CONTROL", control);
+                intent.putExtra("CONTROL", model);
                 startActivity(intent);
             }
         });
@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, AddChallengeForm.class );
 
-            control = new Control();
-            intent.putExtra("CONTROL", control);
+            model = new Model();
+            intent.putExtra("CONTROL", model);
             startActivity(intent);
     }
     @Override
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setListView(){
         ListView listView = findViewById(R.id.listview);
-        list = control.getAll(new Network());
+        list = model.getAll();
 
         ChallengeAdapter challengeAdapter = new ChallengeAdapter(this, list);
 
