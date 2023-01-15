@@ -60,12 +60,15 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("CONTROL", model);
             startActivity(intent);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
 
         setListView();
     }
+
+
     private void setListView(){
         ListView listView = findViewById(R.id.listview);
         list = model.getAll();

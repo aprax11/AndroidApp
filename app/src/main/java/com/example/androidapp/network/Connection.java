@@ -7,11 +7,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Connection {
-    public static String startRequest(String urlEncoded, String urlString) throws IOException {
+public class Connection implements IConnection, Serializable {
+    @Override
+    public String startRequest(String urlString, String urlEncoded) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("POST");

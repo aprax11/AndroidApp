@@ -1,4 +1,4 @@
-package com.example.androidapp.activitys;
+package com.example.androidapp.activitys.integrationTests;
 
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -11,6 +11,7 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.example.androidapp.R;
+import com.example.androidapp.activitys.MainActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

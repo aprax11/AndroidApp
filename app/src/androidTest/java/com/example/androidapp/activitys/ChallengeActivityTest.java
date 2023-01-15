@@ -1,5 +1,6 @@
 package com.example.androidapp.activitys;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -8,9 +9,11 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
 
@@ -21,6 +24,8 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.androidapp.R;
+import com.example.androidapp.containers.IParticipant;
+import com.example.androidapp.containers.Participant;
 import com.example.androidapp.model.IModel;
 import com.example.androidapp.model.Model;
 
@@ -31,14 +36,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+
 
 @RunWith(MockitoJUnitRunner.class)
 
 
 public class ChallengeActivityTest {
     @Mock
-    IModel control = mock(Model.class, withSettings().serializable());
-    //Connection connection = mock(Connection.class);
+    IModel modelMock = mock(Model.class, withSettings().serializable());
 
     @Rule
     public final ActivityScenarioRule<ChallengeActivity> scenarioRule =
@@ -47,7 +53,7 @@ public class ChallengeActivityTest {
                             InstrumentationRegistry.getInstrumentation().getTargetContext(),
                             ChallengeActivity.class)
                             .putExtra("ID", "1")
-                            .putExtra("CONTROL", control)
+                            .putExtra("CONTROL", modelMock)
             );
 
     @Test
@@ -92,7 +98,7 @@ public class ChallengeActivityTest {
 
 
         onView(withId(R.id.addParticipationButton)).perform(click());
-        verify(control).addParticipation(anyString(), anyString(), anyString(), any(Network.class));
+        verify(control).addParticipation(anyString(), anyString(), anyString(), any(AsyncTask.class));
 
     }
 
@@ -100,7 +106,15 @@ public class ChallengeActivityTest {
 
     @Test
     public void isListviewDisplayed_Test() {
+        IParticipant participant = new Participant();
+        participant.setName("test");
+        participant.setScore("1");
+        ArrayList<IParticipant> list = new ArrayList<>();
+        list.add(participant);
+        when(modelMock.getParticipants(any())).thenReturn(list);
+
         ActivityScenario<ChallengeActivity> scenario = scenarioRule.getScenario();
+
 
         onView(withId(R.id.ParticipantsList)).check(matches(isDisplayed()));
     }

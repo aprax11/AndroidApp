@@ -1,27 +1,29 @@
 package com.example.androidapp.model;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
-public class AsyncTaskWrapper implements IAsyncTaskWrapper {
-    private Network network;
+public class AsyncTaskWrapper implements IAsyncTaskWrapper, Serializable {
+    private AsyncTask asyncTask;
 
     public AsyncTaskWrapper(){
-        network = new Network();
+        asyncTask = new AsyncTask();
     }
     @Override
     public String startAsyncTask(String string1, String string2) throws ExecutionException, InterruptedException {
-        String ret = network.execute(string1, string2).get();
+        asyncTask = new AsyncTask();
+        String ret = asyncTask.execute(string1, string2).get();
 
         return ret;
     }
 
     @Override
-    public Network getNetwork() {
-        return network;
+    public AsyncTask getNetwork() {
+        return asyncTask;
     }
 
     @Override
-    public void setNetwork(Network network) {
-        this.network = network;
+    public void setNetwork(AsyncTask asyncTask) {
+        this.asyncTask = asyncTask;
     }
 }
