@@ -2,6 +2,7 @@ package com.example.androidapp.model;
 
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,13 +38,23 @@ public class ModelTest {
     public final String CHALLENGEDESCRIPTION = "This is a test description";
     public final String CHALLENGEID = "1";
 
+
+    @Test
+    public void getSetAsyncTaskWrapperTest(){
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
+
+        Assert.assertEquals(asyncTaskWrapper, model.getAsyncTaskWrapper());
+    }
     @Test
     public void addChallenge_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
-        control.addChallenge(CHALLENGENAME, CHALLENGEDESCRIPTION);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.addChallenge(CHALLENGENAME, CHALLENGEDESCRIPTION);
 
         String url = URLEncoder.encode("challengeName", "UTF-8")+"="+URLEncoder.encode(CHALLENGENAME, "UTF-8")+"&"
                 +URLEncoder.encode("challengeDescription", "UTF-8")+"="+URLEncoder.encode(CHALLENGEDESCRIPTION, "UTF-8");
@@ -52,12 +63,12 @@ public class ModelTest {
     }
     @Test
     public void addParticipant_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
-        control.addParticipation(PARTICIPANTNAME, PARTICIPANTSCORE, CHALLENGEID);
+        model.addParticipation(PARTICIPANTNAME, PARTICIPANTSCORE, CHALLENGEID);
 
         String url = URLEncoder.encode("participantName", "UTF-8")+"="+URLEncoder.encode(PARTICIPANTNAME, "UTF-8")+"&"
                 +URLEncoder.encode("score", "UTF-8")+"="+URLEncoder.encode(PARTICIPANTSCORE, "UTF-8")+"&"
@@ -67,26 +78,26 @@ public class ModelTest {
     }
     @Test
     public void getParticipants_Test() throws ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         when(asyncTaskWrapper.startAsyncTask(anyString(), anyString())).thenReturn(PARTICIPANTNAME+"`"+PARTICIPANTSCORE+"~");
-        ArrayList<IParticipant> ret = control.getParticipants(CHALLENGEID);
+        ArrayList<IParticipant> ret = model.getParticipants(CHALLENGEID);
 
         Assert.assertEquals(PARTICIPANTNAME, ret.get(0).getName());
         Assert.assertEquals(PARTICIPANTSCORE, ret.get(0).getScore());
     }
     @Test
     public void getParticipantsUsesCorrectPhpFile_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         when(asyncTaskWrapper.startAsyncTask(anyString(), anyString())).thenReturn(PARTICIPANTNAME+"`"+PARTICIPANTSCORE+"~");
-        ArrayList<IParticipant> ret = control.getParticipants(CHALLENGEID);
+        ArrayList<IParticipant> ret = model.getParticipants(CHALLENGEID);
 
         String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getParticipants", "UTF-8")+"&"
                 +URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(CHALLENGEID, "UTF-8");
@@ -95,13 +106,13 @@ public class ModelTest {
     }
     @Test
     public void getAll_Test() throws ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         when(asyncTaskWrapper.startAsyncTask(anyString(), anyString())).thenReturn(CHALLENGENAME+"`"+CHALLENGEID+"`"+CHALLENGEDESCRIPTION+"~");
-        List<IChallenge> ret = control.getAll();
+        List<IChallenge> ret = model.getAll();
 
         Assert.assertEquals(CHALLENGENAME, ret.get(0).getName());
         Assert.assertEquals(CHALLENGEID, ret.get(0).getId());
@@ -109,13 +120,13 @@ public class ModelTest {
     }
     @Test
     public void getAllUsesCorrectPhpFile_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         when(asyncTaskWrapper.startAsyncTask(anyString(), anyString())).thenReturn(CHALLENGENAME+"`"+CHALLENGEID+"`"+CHALLENGEDESCRIPTION+"~");
-        List<IChallenge> ret = control.getAll();
+        List<IChallenge> ret = model.getAll();
 
         String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getAll", "UTF-8");
 
@@ -123,12 +134,12 @@ public class ModelTest {
     }
     @Test
     public void exitIfChallengeNameIsEmpty_Test() throws ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
-        String ret = control.addChallenge("", "test");
+        String ret = model.addChallenge("", "test");
 
         verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
 
@@ -136,12 +147,12 @@ public class ModelTest {
     }
     @Test
     public void exitIfChallengeDescriptionIsEmpty_Test() throws ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
-        String ret = control.addChallenge("test", "");
+        String ret = model.addChallenge("test", "");
 
         verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
 
@@ -150,12 +161,12 @@ public class ModelTest {
 
     @Test
     public void exitIfChallengeBothStringsIsEmpty_Test() throws ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
-        String ret = control.addChallenge("", "");
+        String ret = model.addChallenge("", "");
 
         verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
 
@@ -163,12 +174,12 @@ public class ModelTest {
     }
     @Test
     public void exitIfParticipationNameIsEmpty_Test() throws ExecutionException, InterruptedException {
-        IModel control = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = Mockito.mock(AsyncTaskWrapper.class);
+        IModel model = new Model();
+        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
-        control.setAsyncTaskWrapper(asyncTaskWrapper);
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
 
-        String ret = control.addParticipation("", "testS","4");
+        String ret = model.addParticipation("", "testS","4");
 
         verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
 

@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Model;
 import com.example.androidapp.model.IModel;
+import com.example.androidapp.model.Model;
 
 public class AddChallengeForm extends AppCompatActivity {
     IModel model;

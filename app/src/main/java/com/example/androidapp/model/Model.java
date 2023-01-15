@@ -134,8 +134,10 @@ public class Model implements IModel, Serializable {
         return trimmed;
     }
 
-
-
+    @Override
+    public AsyncTaskWrapper getAsyncTaskWrapper() {
+        return asyncTaskWrapper;
+    }
     @Override
     public void setAsyncTaskWrapper(AsyncTaskWrapper asyncTaskWrapper) {
         this.asyncTaskWrapper = asyncTaskWrapper;

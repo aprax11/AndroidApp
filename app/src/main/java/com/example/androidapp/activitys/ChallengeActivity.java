@@ -8,8 +8,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.androidapp.R;
-import com.example.androidapp.model.Model;
 import com.example.androidapp.model.IModel;
+import com.example.androidapp.model.Model;
 import com.example.androidapp.containers.IParticipant;
 
 import java.util.ArrayList;
