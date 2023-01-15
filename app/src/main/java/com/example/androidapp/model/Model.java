@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class Model implements IModel, Serializable {
-    private AsyncTaskWrapper asyncTaskWrapper;
+    private IAsyncTaskWrapper asyncTaskWrapper;
 
     public Model(){
         asyncTaskWrapper = new AsyncTaskWrapper();
@@ -135,11 +135,11 @@ public class Model implements IModel, Serializable {
     }
 
     @Override
-    public AsyncTaskWrapper getAsyncTaskWrapper() {
+    public IAsyncTaskWrapper getAsyncTaskWrapper() {
         return asyncTaskWrapper;
     }
     @Override
-    public void setAsyncTaskWrapper(AsyncTaskWrapper asyncTaskWrapper) {
+    public void setAsyncTaskWrapper(IAsyncTaskWrapper asyncTaskWrapper) {
         this.asyncTaskWrapper = asyncTaskWrapper;
     }
 }

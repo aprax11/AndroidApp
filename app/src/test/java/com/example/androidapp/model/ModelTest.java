@@ -42,7 +42,7 @@ public class ModelTest {
     @Test
     public void getSetAsyncTaskWrapperTest(){
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -51,7 +51,7 @@ public class ModelTest {
     @Test
     public void addChallenge_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
         model.addChallenge(CHALLENGENAME, CHALLENGEDESCRIPTION);
@@ -64,7 +64,7 @@ public class ModelTest {
     @Test
     public void addParticipant_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -79,7 +79,7 @@ public class ModelTest {
     @Test
     public void getParticipants_Test() throws ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -92,7 +92,7 @@ public class ModelTest {
     @Test
     public void getParticipantsUsesCorrectPhpFile_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -107,7 +107,7 @@ public class ModelTest {
     @Test
     public void getAll_Test() throws ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -121,7 +121,7 @@ public class ModelTest {
     @Test
     public void getAllUsesCorrectPhpFile_Test() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -135,7 +135,7 @@ public class ModelTest {
     @Test
     public void exitIfChallengeNameIsEmpty_Test() throws ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -148,7 +148,7 @@ public class ModelTest {
     @Test
     public void exitIfChallengeDescriptionIsEmpty_Test() throws ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -162,7 +162,7 @@ public class ModelTest {
     @Test
     public void exitIfChallengeBothStringsIsEmpty_Test() throws ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
@@ -175,7 +175,7 @@ public class ModelTest {
     @Test
     public void exitIfParticipationNameIsEmpty_Test() throws ExecutionException, InterruptedException {
         IModel model = new Model();
-        AsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 

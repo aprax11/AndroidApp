@@ -16,7 +16,7 @@ public interface IModel extends Serializable {
 
     String addChallenge(String challengeName, String challengeDescription);
 
-    AsyncTaskWrapper getAsyncTaskWrapper();
+    IAsyncTaskWrapper getAsyncTaskWrapper();
 
-    void setAsyncTaskWrapper(AsyncTaskWrapper asyncTaskWrapper);
+    void setAsyncTaskWrapper(IAsyncTaskWrapper asyncTaskWrapper);
 }
