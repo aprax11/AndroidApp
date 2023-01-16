@@ -30,7 +30,7 @@ public class ChallengeAdapter extends ArrayAdapter<IChallenge> {
         // Lookup view for data population
         TextView tvName = (TextView) convertView.findViewById(R.id.ChallengeListItemName);
 
-        TextView tvDescription = (TextView) convertView.findViewById(R.id.ParticipantListItemScore);
+        TextView tvDescription = (TextView) convertView.findViewById(R.id.challengeListItemDescription);
         // Populate the data into the template view using the data object
         tvName.setText(challenge.getName());
 

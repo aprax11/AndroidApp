@@ -10,7 +10,7 @@ public class AsyncTask extends android.os.AsyncTask<String, Void, String> implem
     private IConnection connection;
 
     public AsyncTask(){
-        connection = new Connection();
+        connection = new Connection("run");
     }
     @Override
     protected String doInBackground(String... strings) {

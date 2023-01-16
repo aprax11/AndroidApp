@@ -30,7 +30,7 @@ public class ParticipantAdapter extends ArrayAdapter<IParticipant> {
         // Lookup view for data population
         TextView tvName = (TextView) convertView.findViewById(R.id.ParticipantListItemName);
 
-        TextView tvDescription = (TextView) convertView.findViewById(R.id.ParticipantListItemScore);
+        TextView tvDescription = (TextView) convertView.findViewById(R.id.challengeListItemDescription);
         // Populate the data into the template view using the data object
         tvName.setText(participant.getName());
 

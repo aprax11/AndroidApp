@@ -33,18 +33,17 @@ import com.example.androidapp.model.Model;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JUnit4.class)
 
 
 public class ChallengeActivityTest {
-    @Mock
-    IModel modelMock = mock(Model.class, withSettings().serializable());
 
     @Rule
     public final ActivityScenarioRule<ChallengeActivity> scenarioRule =
@@ -53,7 +52,7 @@ public class ChallengeActivityTest {
                             InstrumentationRegistry.getInstrumentation().getTargetContext(),
                             ChallengeActivity.class)
                             .putExtra("ID", "1")
-                            .putExtra("CONTROL", modelMock)
+                            .putExtra("MODE", "testScenario")
             );
 
     @Test
@@ -86,35 +85,11 @@ public class ChallengeActivityTest {
 
         onView(withId(R.id.addParticipationButton)).check(matches(withText("add Score")));
     }
-    /*
-    @Test
-    public void Button_Test() {
-        ActivityScenario<ChallengeActivity> scenario = scenarioRule.getScenario();
 
-
-        onView(withId(R.id.addParticipationScore)).check(matches(isDisplayed()));
-        onView(withId(R.id.addParticipationName)).perform(typeText("ButtonTest"));
-        onView(withId(R.id.addParticipationScore)).perform(typeText("10"));
-
-
-        onView(withId(R.id.addParticipationButton)).perform(click());
-        verify(control).addParticipation(anyString(), anyString(), anyString(), any(AsyncTask.class));
-
-    }
-
-     */
 
     @Test
     public void isListviewDisplayed_Test() {
-        IParticipant participant = new Participant();
-        participant.setName("test");
-        participant.setScore("1");
-        ArrayList<IParticipant> list = new ArrayList<>();
-        list.add(participant);
-        when(modelMock.getParticipants(any())).thenReturn(list);
-
         ActivityScenario<ChallengeActivity> scenario = scenarioRule.getScenario();
-
 
         onView(withId(R.id.ParticipantsList)).check(matches(isDisplayed()));
     }

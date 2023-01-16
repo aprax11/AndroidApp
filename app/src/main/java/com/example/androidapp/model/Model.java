@@ -17,9 +17,17 @@ import java.util.concurrent.ExecutionException;
 public class Model implements IModel, Serializable {
     private IAsyncTaskWrapper asyncTaskWrapper;
 
-    public Model(){
+    private Model(){
         asyncTaskWrapper = new AsyncTaskWrapper();
     }
+    private  static Model instance;
+    public static Model getInstance(){
+        if(instance == null) {
+            instance = new Model();
+        }
+        return instance;
+    }
+
     @Override
     public List<IChallenge> getAll(){
         try {

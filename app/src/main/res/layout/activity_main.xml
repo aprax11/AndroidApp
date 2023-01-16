@@ -4,30 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
+    android:id="@+id/mainActivity"
     tools:context=".activitys.MainActivity"
     >
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="616dp"
-        android:layout_below="@+id/buttonSearchForm"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="2dip"
-        android:background="#66FFFFFF"
-        android:drawSelectorOnTop="false"
-        android:listSelector="@android:color/transparent"
-        android:visibility="visible">
-    </ListView>
+
 
     <Button
-        android:id="@+id/buttonSearchForm"
+        android:id="@+id/continueButton"
         android:layout_width="128dp"
         android:layout_height="66dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="153dp"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="145dp"
         android:listSelector="@android:color/transparent"
-        android:text="post Challenge" />
+        android:text="continue" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="0dp"
+        android:text="Challenge App"
+        android:textSize="34sp"
+        android:gravity="center"/>
 </RelativeLayout>

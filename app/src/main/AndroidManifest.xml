@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".activitys.ChallengeOverviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.ParticipantListItem"
             android:exported="false">
             <meta-data

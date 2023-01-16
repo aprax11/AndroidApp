@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.androidapp.R;
+import com.example.androidapp.containers.Participant;
 import com.example.androidapp.model.IModel;
 import com.example.androidapp.model.Model;
 import com.example.androidapp.containers.IParticipant;
@@ -19,8 +20,9 @@ public class ChallengeActivity extends AppCompatActivity {
     EditText addParticipationScore;
     ListView participantsListView;
     String id;
-    ArrayList<IParticipant> participantList;
-    IModel model;
+    String mode;
+    ArrayList<IParticipant> participantList = new ArrayList<>();
+    IModel model = Model.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,30 +31,34 @@ public class ChallengeActivity extends AppCompatActivity {
 
 
         id = getIntent().getStringExtra("ID");
-        model = (Model) getIntent().getSerializableExtra("CONTROL");
+        mode = getIntent().getStringExtra("MODE");
 
         participantsListView = findViewById(R.id.ParticipantsList);
         addParticipationName = (EditText) findViewById(R.id.addParticipationName);
         addParticipationScore = (EditText) findViewById(R.id.addParticipationScore);
 
-
-        participantList = model.getParticipants(id);
-        setParticipantList(participantList);
-
-
+        setParticipantList(mode);
     }
     public void onSubmitParticipation(View view){
         String addParticipantName = this.addParticipationName.getText().toString();
         String addParticipantScore= this.addParticipationScore.getText().toString();
 
-        String ret = model.addParticipation(addParticipantName, addParticipantScore, id);
-        if(ret.equals("1")){
-            finish();
-        }else{
-            ret = "Error";
+        if(mode.equals("run")){
+            String ret = model.addParticipation(addParticipantName, addParticipantScore, id);
         }
+        finish();
     }
-    public void setParticipantList(ArrayList<IParticipant> participantList){
+    public void setParticipantList(String mode){
+
+        if(mode.equals("run")){
+            participantList = model.getParticipants(id);
+        }else{
+            IParticipant testParticipant = new Participant();
+            testParticipant.setName("hardCodedTestParticipant");
+            testParticipant.setScore("10");
+
+            participantList.add(testParticipant);
+        }
         ParticipantAdapter participantAdapter = new ParticipantAdapter(this, participantList);
         participantsListView.setAdapter(participantAdapter);
     }

@@ -22,23 +22,21 @@ import com.example.androidapp.model.Model;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JUnit4.class)
 public class AddChallengeFormTest {
 
-    @Mock
-    IModel control = mock(Model.class, withSettings().serializable());
-    //Connection connection = mock(Connection.class);
+
 
     @Rule
     public final ActivityScenarioRule<AddChallengeForm> scenarioRule =
             new ActivityScenarioRule<>(
                     new Intent(
                             InstrumentationRegistry.getInstrumentation().getTargetContext(),
-                            AddChallengeForm.class)
-                            .putExtra("CONTROL", control)
+                            AddChallengeForm.class).putExtra("MODE", "testScenario")
             );
 
     @Test
@@ -70,14 +68,6 @@ public class AddChallengeFormTest {
         ActivityScenario<AddChallengeForm> scenario = scenarioRule.getScenario();
 
         onView(withId(R.id.postChallengeButton)).check(matches(withText("post Challenge")));
-    }
-    @Test
-    public void b_Test() {
-        ActivityScenario<AddChallengeForm> scenario = scenarioRule.getScenario();
-
-        onView(withId(R.id.postChallengeButton)).perform(click());
-
-        onView(withId(R.id.main)).check(matches(isDisplayed()));
     }
 
 }

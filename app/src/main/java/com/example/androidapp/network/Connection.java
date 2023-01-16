@@ -11,34 +11,42 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Connection implements IConnection, Serializable {
+public class Connection implements IConnection {
+    private String mode;
+    public Connection(String mode){
+        this.mode = mode;
+    }
     @Override
     public String startRequest(String urlString, String urlEncoded) throws IOException {
-        URL url = new URL(urlString);
-        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-        httpURLConnection.setRequestMethod("POST");
-        httpURLConnection.setDoOutput(true);
-        httpURLConnection.setDoInput(true);
-        OutputStream outputStream = httpURLConnection.getOutputStream();
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+        if(mode.equals("run")){
+            URL url = new URL(urlString);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-        bufferedWriter.write(urlEncoded);
-        bufferedWriter.flush();
-        bufferedWriter.close();
-        outputStream.close();
+            bufferedWriter.write(urlEncoded);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
 
-        InputStream inputStream = httpURLConnection.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-        StringBuilder builder = new StringBuilder();
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
 
-            builder.append(line);
+                builder.append(line);
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+
+            return builder.toString();
+        }else {
+            return "testString";
         }
-        bufferedReader.close();
-        inputStream.close();
-        httpURLConnection.disconnect();
-
-        return builder.toString();
     }
 }

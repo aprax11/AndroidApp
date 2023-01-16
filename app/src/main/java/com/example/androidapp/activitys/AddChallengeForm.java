@@ -10,15 +10,18 @@ import com.example.androidapp.model.IModel;
 import com.example.androidapp.model.Model;
 
 public class AddChallengeForm extends AppCompatActivity {
-    IModel model;
+    IModel model = Model.getInstance();
     EditText challengeName;
     EditText challengeDescription;
+
+    String mode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_form);
 
-        model = (Model) getIntent().getSerializableExtra("CONTROL");
+        mode = getIntent().getStringExtra("MODE");
+
         challengeName = (EditText) findViewById(R.id.challengeName);
         challengeDescription = (EditText) findViewById(R.id.challengeDescription);
         
@@ -28,7 +31,9 @@ public class AddChallengeForm extends AppCompatActivity {
         String challengeName = this.challengeName.getText().toString();
         String challengeDescription = this.challengeDescription.getText().toString();
 
-        model.addChallenge(challengeName, challengeDescription);
+        if(mode.equals("run")){
+            model.addChallenge(challengeName, challengeDescription);
+        }
 
         finish();
     }
