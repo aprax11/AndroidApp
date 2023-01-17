@@ -7,6 +7,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.hamcrest.CoreMatchers.allOf;
+
 import android.content.Intent;
 
 import androidx.test.core.app.ActivityScenario;
@@ -50,6 +52,13 @@ public class ChallengeOverviewActivityTest {
         onView(withId(R.id.listview)).check(matches(isDisplayed()));
     }
     @Test
+    public void listViewNavigation_Test() {
+        ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
+        onData(allOf()).inAdapterView(withId(R.id.listview)).atPosition(0).perform(click());
+
+        onView(withId(R.id.challengeActivity)).check(matches(isDisplayed()));
+    }
+    @Test
     public void isButtonDisplayed_Test() {
         ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
 
@@ -68,5 +77,17 @@ public class ChallengeOverviewActivityTest {
         onView(withId(R.id.buttonSearchForm)).perform(click());
 
         onView(withId(R.id.addChallengeForm)).check(matches(isDisplayed()));
+    }
+    @Test
+    public void isReloadButtonDisplayed_Test() {
+        ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
+
+        onView(withId(R.id.reloadButton)).check(matches(isDisplayed()));
+    }
+    @Test
+    public void reloadButtonTextDisplayed_Test() {
+        ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
+
+        onView(withId(R.id.reloadButton)).check(matches(withText("refresh")));
     }
 }

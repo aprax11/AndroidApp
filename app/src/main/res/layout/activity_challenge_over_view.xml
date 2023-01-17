@@ -9,10 +9,9 @@
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="407dp"
-        android:layout_height="651dp"
+        android:layout_width="402dp"
+        android:layout_height="491dp"
         android:layout_below="@+id/buttonSearchForm"
-        android:layout_marginTop="14dp"
         android:background="#66FFFFFF"
         android:drawSelectorOnTop="false"
         android:listSelector="@android:color/transparent"
@@ -20,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSearchForm"/>
+        app:layout_constraintTop_toBottomOf="@+id/buttonSearchForm" />
 
     <Button
         android:id="@+id/buttonSearchForm"

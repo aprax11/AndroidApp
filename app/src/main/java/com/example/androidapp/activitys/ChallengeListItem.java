@@ -1,6 +1,9 @@
 package com.example.androidapp.activitys;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.androidapp.R;
 
@@ -10,8 +13,6 @@ public class ChallengeListItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_list_item);
-
-
 
     }
 }
