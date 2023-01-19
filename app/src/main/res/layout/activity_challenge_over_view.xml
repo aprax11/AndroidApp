@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/reloadButton"
+        android:id="@+id/refreshButton"
         android:layout_width="128dp"
         android:layout_height="66dp"
         android:layout_marginTop="12dp"

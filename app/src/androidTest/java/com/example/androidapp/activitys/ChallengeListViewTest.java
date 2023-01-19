@@ -35,12 +35,20 @@ public class ChallengeListViewTest {
     public void listViewDataPosOneName_Test() {
         ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
 
-        onData(allOf()).inAdapterView(withId(R.id.listview)).atPosition(0).onChildView(withId(R.id.ChallengeListItemName)).check(matches(withText("hardcodedTestChallenge")));
+        onData(allOf())
+                .inAdapterView(withId(R.id.listview))
+                .atPosition(0)
+                .onChildView(withId(R.id.ChallengeListItemName))
+                .check(matches(withText("hardcodedTestChallenge")));
     }
     @Test
-    public void listViewDataPosOneScore_Test() {
+    public void listViewDataPosOneDescription_Test() {
         ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
 
-        onData(allOf()).inAdapterView(withId(R.id.listview)).atPosition(0).onChildView(withId(R.id.challengeListItemDescription)).check(matches(withText("hardcodedTestChallengeDescription")));
+        onData(allOf())
+                .inAdapterView(withId(R.id.listview))
+                .atPosition(0)
+                .onChildView(withId(R.id.challengeListItemDescription))
+                .check(matches(withText("hardcodedTestChallengeDescription")));
     }
 }

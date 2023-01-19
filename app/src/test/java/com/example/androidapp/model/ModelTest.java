@@ -101,7 +101,7 @@ public class ModelTest {
         verify(asyncTaskWrapper).startAsyncTask(GETPARTICIPANTSSCRIPTLOCATION, url);
     }
     @Test
-    public void getAll_Test() throws ExecutionException, InterruptedException {
+    public void getAllChallenges_Test() throws ExecutionException, InterruptedException {
         IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
 
         model.setAsyncTaskWrapper(asyncTaskWrapper);
@@ -170,6 +170,30 @@ public class ModelTest {
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         String ret = model.addParticipation("", "testS","4");
+
+        verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
+
+        Assert.assertEquals("1", ret);
+    }
+    @Test
+    public void exitIfParticipationScoreIsEmpty_Test() throws ExecutionException, InterruptedException {
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
+
+        String ret = model.addParticipation("testP", "","4");
+
+        verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
+
+        Assert.assertEquals("1", ret);
+    }
+    @Test
+    public void exitIfParticipationBothStringsIsEmpty_Test() throws ExecutionException, InterruptedException {
+        IAsyncTaskWrapper asyncTaskWrapper = mock(AsyncTaskWrapper.class);
+
+        model.setAsyncTaskWrapper(asyncTaskWrapper);
+
+        String ret = model.addParticipation("", "", "4");
 
         verify(asyncTaskWrapper, never()).startAsyncTask(anyString(), anyString());
 

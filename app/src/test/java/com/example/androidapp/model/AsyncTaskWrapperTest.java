@@ -3,8 +3,6 @@ package com.example.androidapp.model;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.net.Network;
-
 import com.example.androidapp.network.Connection;
 import com.example.androidapp.network.IConnection;
 
@@ -13,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 @RunWith(JUnit4.class)
 public class AsyncTaskWrapperTest {
@@ -24,8 +21,8 @@ public class AsyncTaskWrapperTest {
 
         AsyncTask asyncTaskMock = new AsyncTask();
 
-        asyncTaskWrapper.setNetwork(asyncTaskMock);
-        Assert.assertEquals(asyncTaskMock, asyncTaskWrapper.getNetwork());
+        asyncTaskWrapper.setAsyncTask(asyncTaskMock);
+        Assert.assertEquals(asyncTaskMock, asyncTaskWrapper.getAsyncTask());
     }
     @Test
     public void startAsyncTaskTest() throws ExecutionException, InterruptedException {
@@ -35,7 +32,7 @@ public class AsyncTaskWrapperTest {
         IConnection testConnection = new Connection("testScenario");
 
         asyncTask.setConnection(testConnection);
-        asyncTaskWrapper.setNetwork(asyncTask);
+        asyncTaskWrapper.setAsyncTask(asyncTask);
 
         String ret = asyncTaskWrapper.startAsyncTask("String1", "String2");
 

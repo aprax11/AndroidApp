@@ -18,12 +18,12 @@ public class AsyncTaskWrapper implements IAsyncTaskWrapper, Serializable {
     }
 
     @Override
-    public AsyncTask getNetwork() {
+    public AsyncTask getAsyncTask() {
         return asyncTask;
     }
 
     @Override
-    public void setNetwork(AsyncTask asyncTask) {
+    public void setAsyncTask(AsyncTask asyncTask) {
         this.asyncTask = asyncTask;
     }
 }

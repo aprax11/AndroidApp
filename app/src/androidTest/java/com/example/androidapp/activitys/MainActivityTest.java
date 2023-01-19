@@ -5,6 +5,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import android.content.Intent;
 
@@ -44,6 +45,14 @@ public class MainActivityTest {
 
         onView(withId(R.id.continueButton)).check(matches(isDisplayed()));
     }
+    @Test
+    public void continueButtonText_Test() {
+        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+
+        onView(withId(R.id.continueButton)).check(matches(withText("continue")));
+    }
+
+    //viewmodel
     @Test
     public void navigation_Test() {
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();

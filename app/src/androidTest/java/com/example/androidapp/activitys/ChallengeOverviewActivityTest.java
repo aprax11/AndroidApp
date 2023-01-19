@@ -17,9 +17,6 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.androidapp.R;
-import com.example.androidapp.activitys.AddChallengeForm;
-import com.example.androidapp.activitys.ChallengeOverviewActivity;
-import com.example.androidapp.activitys.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -51,6 +48,7 @@ public class ChallengeOverviewActivityTest {
 
         onView(withId(R.id.listview)).check(matches(isDisplayed()));
     }
+    //viewModel
     @Test
     public void listViewNavigation_Test() {
         ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
@@ -79,15 +77,15 @@ public class ChallengeOverviewActivityTest {
         onView(withId(R.id.addChallengeForm)).check(matches(isDisplayed()));
     }
     @Test
-    public void isReloadButtonDisplayed_Test() {
+    public void isRefreshButtonDisplayed_Test() {
         ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
 
-        onView(withId(R.id.reloadButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.refreshButton)).check(matches(isDisplayed()));
     }
     @Test
-    public void reloadButtonTextDisplayed_Test() {
+    public void reloadButtonText_Test() {
         ActivityScenario<ChallengeOverviewActivity> scenario = scenarioRule.getScenario();
 
-        onView(withId(R.id.reloadButton)).check(matches(withText("refresh")));
+        onView(withId(R.id.refreshButton)).check(matches(withText("refresh")));
     }
 }
