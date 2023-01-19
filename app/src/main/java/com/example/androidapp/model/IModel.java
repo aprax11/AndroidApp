@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IModel extends Serializable {
-    List<IChallenge> getAll();
+    List<IChallenge> getAllChallenges();
 
     ArrayList<IParticipant> getParticipants(String id);
 

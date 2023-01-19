@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.androidapp.R;
 import com.example.androidapp.containers.Challenge;
@@ -79,7 +77,7 @@ public class ChallengeOverviewActivity extends AppCompatActivity {
     private void setListView(String mode){
         ListView listView = findViewById(R.id.listview);
         if(mode.equals("run")){
-            list = model.getAll();
+            list = model.getAllChallenges();
         }else{
             IChallenge testChallenge = new Challenge();
             testChallenge.setName("hardcodedTestChallenge");

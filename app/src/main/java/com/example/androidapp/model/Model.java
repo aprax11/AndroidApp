@@ -29,7 +29,7 @@ public class Model implements IModel, Serializable {
     }
 
     @Override
-    public List<IChallenge> getAll(){
+    public List<IChallenge> getAllChallenges(){
         try {
             String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getAll", "UTF-8");
             String res = asyncTaskWrapper.startAsyncTask("http://10.0.2.2/androidBelegPhpScript/getAll.php", url);

@@ -13,7 +13,6 @@ import com.example.androidapp.containers.IParticipant;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.UnsupportedEncodingException;
@@ -108,7 +107,7 @@ public class ModelTest {
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         when(asyncTaskWrapper.startAsyncTask(anyString(), anyString())).thenReturn(CHALLENGENAME+"`"+CHALLENGEID+"`"+CHALLENGEDESCRIPTION+"~");
-        List<IChallenge> ret = model.getAll();
+        List<IChallenge> ret = model.getAllChallenges();
 
         Assert.assertEquals(CHALLENGENAME, ret.get(0).getName());
         Assert.assertEquals(CHALLENGEID, ret.get(0).getId());
@@ -121,7 +120,7 @@ public class ModelTest {
         model.setAsyncTaskWrapper(asyncTaskWrapper);
 
         when(asyncTaskWrapper.startAsyncTask(anyString(), anyString())).thenReturn(CHALLENGENAME+"`"+CHALLENGEID+"`"+CHALLENGEDESCRIPTION+"~");
-        List<IChallenge> ret = model.getAll();
+        List<IChallenge> ret = model.getAllChallenges();
 
         String url = URLEncoder.encode("phpType", "UTF-8")+"="+URLEncoder.encode("getAll", "UTF-8");
 
